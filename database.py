@@ -58,8 +58,14 @@ def get_random_poll_vote(connection, option_id):
 def create_poll(connection, title, owner, options):
     with connection:
         with connection.cursor() as cursor:
-            pass
+            cursor.execute("INSERT INTO polls VALUES (%s, %s);" (title, owner))
+            cursor.execute("SELECT id FROM polls ORDER BY id DESC LIMIT 1;")
 
+            poll_id = cursor.fetchone()[0]
+            option_values = [(option_text, poll_id) for option_text in options]
+            
+            for option_value in option_values:
+                cursor.execute(INSERT_OPTION, option_values)
 
 def add_poll_vote(connection, username, option_id):
     with connection:
