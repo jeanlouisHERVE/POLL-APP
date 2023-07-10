@@ -1,0 +1,6 @@
+
+Virtual environment: 
+
+pip -m venv /path/to/env  #create environment 
+source ./Scripts/activate #activate environment
+deactivate                #deactivate environment
